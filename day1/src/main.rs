@@ -40,6 +40,7 @@ fn main() {
 
     match maybe_max_cal {
         Some (max_cal) => {
+            // part 1
             println!("Complete, found {} elves. The elf with the most calories has {} total calories.", elves.len(), max_cal);
         }
         None => {
@@ -61,6 +62,7 @@ fn main() {
     let third_highest = totals[num_elves-3];
     let top_three = highest + second_highest + third_highest;
 
+    // part 2
     println!("The top 3 elves have a total calorie count of {}.", top_three);
 
 }
