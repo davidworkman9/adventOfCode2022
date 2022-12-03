@@ -41,30 +41,13 @@ fn main() {
     assert!(sum == 8349);   // part 1
 
 
-    let mut groups:Vec<Vec<&String>> = Vec::new();
-    let mut curr_group = Vec::new();
-    for line_x in lines.iter() {
-        curr_group.push(line_x);
-        if curr_group.len() == 3 {
-            groups.push(curr_group);
-            curr_group = Vec::new();
-        }
-    }
-
     let mut sum2 = 0;
-    for group in groups {
-        let elf1 = group[0];
-        let elf2 = group[1];
-        let elf3 = group[2];
+    for group in lines.chunks(3) {
+        let chars: Vec<char> = group[0].chars().collect();
 
-        let mut matching_char: char = '&';
-        let chars: Vec<char> = elf1.chars().collect();
-        for char in chars {
-            if elf2.contains(char) && elf3.contains(char) {
-                matching_char = char;
-                break;
-            }
-        }
+        let matching_char = chars.iter()
+            .find(|c| group[1].contains(**c) && group[2].contains(**c))
+            .unwrap_or(&'&');
 
         let priority = char_to_priority(matching_char.to_string().as_str()) as u32;
         sum2 += priority;
